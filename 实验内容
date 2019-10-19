@@ -1,0 +1,96 @@
+一、实验过程（实验步骤、记录、数据、分析）
+
+1.核心代码截图：
+【实验一】实现滚动显示自定义字符串。
+
+#include <SevenSegmentTM1637.h>
+
+SevenSegmentTM1637  display(6,7);
+
+void setup(){
+   display.begin();
+  while (true) {
+    delay(1000);
+    display.print("234590F");
+  }
+}
+
+void loop(){
+
+}
+
+
+【实验二】实现显示自定义时间。
+
+#include <SevenSegmentExtended.h>
+#include <SevenSegmentTM1637.h>
+
+SevenSegmentExtended  display(6,7);
+
+void setup(){
+   display.begin();
+  display.setBacklight(20);
+  display.printTime(20,28,HIGH);
+}
+
+void loop(){
+
+}
+
+【实验三】实现显示秒表。
+
+#include <SevenSegmentExtended.h>
+#include <SevenSegmentTM1637.h>
+
+volatile int I;
+volatile int O;
+SevenSegmentExtended  display(6,7);
+
+void setup(){
+   display.begin();
+  I = 0;
+  O = 0;
+}
+
+void loop(){
+  display.printTime(item,item,HIGH);
+  while (true) {
+    delay(1000);
+    T = T + 1;
+    if (item == 60) {
+      O = 0;
+      O = item2 + 1;
+
+    }
+    display.printTime(O,T,HIGH);
+  }
+
+}
+2.实验效果图：
+【实验一】实现滚动显示自定义字符串。
+
+
+【实验二】实现显示自定义时间。
+
+【实验三】实现显示秒表。
+
+
+ 
+二、测试/调试及实验结果分析
+本次实验的CLK管脚选择6，DIO管脚选择7
+【实验一】实现滚动显示自定义字符串。
+TM1637初始化CLK管脚6和DIO管脚7，并将TM1637的亮度设置为20，最后输出一个字符串：FFOF。经验证实验结果与实际结果相符。
+【实验二】实现显示自定义时间。
+      TM1637初始化CLK管脚6和DIO管脚7，并将TM1637的亮度设置为20，最后将TM1637
+显示的时间设为20：28分，时钟点设为高，经验证实验结果与实际结果相符。
+【实验三】实现显示秒表。
+      由于秒表是从00：00开始计时的，所以本次实验设置了两个变量：item和item2，item表示时分，item2表示秒，并将这两个变量初始化位0，
+			在重复执行条件满足为真下，将item延时一秒++1，如果item等于60则item重置为0，item2++1，这样就实现了秒表的功能，经验证实验结果与实际结果相符。
+
+
+三、实验结论与体会
+
+1、本次实验相对来说实验三的难度较大，前两个都非常简单。
+2、实验三主要是秒表的逻辑的实现，在实验三中，我们设置了两个变量：item和item2，item表示时分，item2表示秒，并将这两个变量初始化位0，
+在重复执行条件满足为真下，将item延时一秒再++1，如果item等于60则item重置为0，item2++1，这样就简单地实现了秒表的功能。
+
